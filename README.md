@@ -3,4 +3,4 @@ This Adobe XD Plugin will generate CSS variables for the saved Document Assets (
 The colors will be grouped based on their saturation ( Greyscale vs Color ) and sorted based on their Lightness. This will influence the name given to the variable representing the color.  
 
 ![Screenshot](thumbnail.PNG)  
-A demo can be seen here: https://www.youtube.com/watch?v=-Xrg196qaxw
+You can watch a short [demo](https://www.youtube.com/watch?v=-Xrg196qaxw "Demo video") as well.
