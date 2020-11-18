@@ -1,6 +1,7 @@
 # adobe-xd-to-css-variables
 This Adobe XD Plugin will automate the process of migrating global styles to CSS variables. The plugin will look at the colors, font families and font styles that are saved in the asset pannel. These are grouped, ordered and written to disk. The output will look something like this:
 
+``` CSS
 :root {
 	/* Colors */
 	--color-1: #a3a0fbff;
@@ -25,6 +26,7 @@ This Adobe XD Plugin will automate the process of migrating global styles to CSS
 	--font-styles-1: "Regular";
 	--font-styles-2: "Bold";
 }
+```
 
 Note that the neutral colors are sorted and that the names actually make sense.
 
