@@ -100,25 +100,30 @@ function exportColors() {
     });
 
     // Construct css string
-    let cssString = "\t/* Colors */\n";
-    for (const colorIndex in colors) {
-        cssString += `\t--color-${parseInt(colorIndex) + 1}: ${colors[colorIndex].hex};\n`;
-    }
-    cssString += "\n";
-
-    const neutralCenter = parseInt(neutralColors.length / 2);
-    for (const neutralColorIndex in neutralColors) {
-        let suffix = "";
-        if (neutralColorIndex != neutralCenter) {
-            const distanceFromCenter = Math.abs(neutralColorIndex - neutralCenter) - 1;
-            if (distanceFromCenter === 0) {
-                suffix = neutralColorIndex < neutralCenter ? "-light" : "-dark";
-            } else {
-                suffix = neutralColorIndex < neutralCenter ? `-${xForeachNumber(distanceFromCenter)}-light` : `-${xForeachNumber(distanceFromCenter)}-dark`;
-            }
+    let cssString = "";
+    if (colors.length > 0) {
+        cssString = "\t/* Colors */\n";
+        for (const colorIndex in colors) {
+            cssString += `\t--color-${parseInt(colorIndex) + 1}: ${colors[colorIndex].hex};\n`;
         }
+        cssString += "\n";
+    }
 
-        cssString += `\t--color-neutral${suffix}: ${neutralColors[neutralColorIndex].hex};\n`;
+    if (neutralColors.length > 0) {
+        const neutralCenter = parseInt(neutralColors.length / 2);
+        for (const neutralColorIndex in neutralColors) {
+            let suffix = "";
+            if (neutralColorIndex != neutralCenter) {
+                const distanceFromCenter = Math.abs(neutralColorIndex - neutralCenter) - 1;
+                if (distanceFromCenter === 0) {
+                    suffix = neutralColorIndex < neutralCenter ? "-light" : "-dark";
+                } else {
+                    suffix = neutralColorIndex < neutralCenter ? `-${xForeachNumber(distanceFromCenter)}-light` : `-${xForeachNumber(distanceFromCenter)}-dark`;
+                }
+            }
+
+            cssString += `\t--color-neutral${suffix}: ${neutralColors[neutralColorIndex].hex};\n`;
+        }
     }
 
     return cssString;
@@ -127,30 +132,34 @@ function exportColors() {
 function exportFonts() {
     const allCharacterStyles = assets.characterStyles.get();
 
-    let fontFamilies = [],
-        fontStyles = [],
-        cssString = "\n\t/* Fonts */\n";
+    if (allCharacterStyles.length > 0) {
+        let fontFamilies = [],
+            fontStyles = [],
+            cssString = "\n\t/* Fonts */\n";
 
-    for (const characterStyle of allCharacterStyles) {
-        const fontFamily = characterStyle.style.fontFamily;
-        const fontStyle = characterStyle.style.fontStyle;
-        if (!fontFamilies.includes(fontFamily)) {
-            fontFamilies.push(fontFamily);
+        for (const characterStyle of allCharacterStyles) {
+            const fontFamily = characterStyle.style.fontFamily;
+            const fontStyle = characterStyle.style.fontStyle;
+            if (!fontFamilies.includes(fontFamily)) {
+                fontFamilies.push(fontFamily);
+            }
+            if (!fontStyles.includes(fontStyle)) {
+                fontStyles.push(fontStyle);
+            }
         }
-        if (!fontStyles.includes(fontStyle)) {
-            fontStyles.push(fontStyle);
+
+        for (const fontFamilyIndex in fontFamilies) {
+            cssString += `\t--fonts-${parseInt(fontFamilyIndex) + 1}: "${fontFamilies[fontFamilyIndex]}";\n`;
         }
+
+        for (const fontStyleIndex in fontStyles) {
+            cssString += `\t--font-styles-${parseInt(fontStyleIndex) + 1}: "${fontStyles[fontStyleIndex]}";\n`;
+        }
+
+        return cssString;
     }
 
-    for (const fontFamilyIndex in fontFamilies) {
-        cssString += `\t--fonts-${parseInt(fontFamilyIndex) + 1}: "${fontFamilies[fontFamilyIndex]}";\n`;
-    }
-
-    for (const fontStyleIndex in fontStyles) {
-        cssString += `\t--font-styles-${parseInt(fontStyleIndex) + 1}: "${fontStyles[fontStyleIndex]}";\n`;
-    }
-
-    return cssString;
+    return "";
 }
 
 async function writeToDisk(content) {
