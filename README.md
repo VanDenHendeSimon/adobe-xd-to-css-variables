@@ -22,9 +22,10 @@ This Adobe XD Plugin will automate the process of migrating global styles to CSS
 	--color-neutral-xxx-dark: #3b3b53ff;
 
 	/* Fonts */
-	--fonts-1: "Source Sans Pro";
-	--font-styles-1: "Regular";
-	--font-styles-2: "Bold";
+	--font-family-1: "Source Sans Pro";
+	--font-style-1: "Regular";
+	--font-style-2: "Bold";
+	--font-style-3: "Light";
 }
 ```
 
