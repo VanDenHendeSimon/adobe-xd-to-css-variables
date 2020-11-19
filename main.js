@@ -149,11 +149,11 @@ function exportFonts() {
         }
 
         for (const fontFamilyIndex in fontFamilies) {
-            cssString += `\t--fonts-${parseInt(fontFamilyIndex) + 1}: "${fontFamilies[fontFamilyIndex]}";\n`;
+            cssString += `\t--font-family-${parseInt(fontFamilyIndex) + 1}: "${fontFamilies[fontFamilyIndex]}";\n`;
         }
 
         for (const fontStyleIndex in fontStyles) {
-            cssString += `\t--font-styles-${parseInt(fontStyleIndex) + 1}: "${fontStyles[fontStyleIndex]}";\n`;
+            cssString += `\t--font-style-${parseInt(fontStyleIndex) + 1}: "${fontStyles[fontStyleIndex]}";\n`;
         }
 
         return cssString;
